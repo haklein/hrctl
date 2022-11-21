@@ -106,9 +106,9 @@ def band_tostr(band: int) -> str:
     elif band == 2:
             return "12M"
     elif band == 3:
-            return "17M"
-    elif band == 4:
             return "15M"
+    elif band == 4:
+            return "17M"
     elif band == 5:
             return "20M"
     elif band == 6:
