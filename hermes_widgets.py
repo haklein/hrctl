@@ -16,9 +16,7 @@ rpc_client = RPCClient(
     HttpPostClientTransport('http://192.168.80.2:8066')
 )
 
-str_server = rpc_client.get_proxy()
-
-
+hardrock_server = rpc_client.get_proxy()
 
 from hermes.quisk_widgets import BottomWidgets as StandardWidgets
 
@@ -48,16 +46,14 @@ class BottomWidgets(StandardWidgets):	# Add extra widgets to the bottom of the s
 
   def OnTune(self, event):
     print ("Tune button pressed")
-    result = str_server.setTune()
+    result = hardrock_server.setTune()
     self.tuneButton.SetValue(False)
     print ("Tune finished")
 
   def UpdateText(self):
     super().UpdateText()
-    # PA Fwd Power
-    # call a method called 'reverse_string' with a single string argument
-    # result = str_server.getTemperature()
-    result = str_server.getStatus()
+  
+    result = hardrock_server.getStatus()
     if "pep" in result:
         self.pa_text_fwd_power.SetLabel(str(result["pep"]) + "(" + str(result["avg"]) + ")" + "W")
     else:
@@ -74,8 +70,6 @@ class BottomWidgets(StandardWidgets):	# Add extra widgets to the bottom of the s
         self.pa_text_band.SetLabel("Band:" + str(result["band"]))
     else:
         self.pa_text_band.SetLabel("Band:?")
-
-    # print("Server answered:", result)
 
   def OnDataPAFwdPower(self, event):
     self.data_sizer.Replace(self.pa_text_data, self.pa_text_fwd_power)
